@@ -21,14 +21,17 @@ const themes = {
       primary: {
         backgroundColor: "rgb(124, 93, 250)",
         color: "rgb(255, 255, 255)",
+        hover:"rgb(146, 119, 255)",
       },
       secondary: {
         backgroundColor: "rgb(236, 87, 87)",
         color: "rgb(255, 255, 255)",
+        hover: "rgb(255, 151, 151)",
       },
       tertiary: {
         backgroundColor: "rgb(37, 41, 69)",
         color: "rgb(223, 227, 250)",
+        hover:"rgb(146, 119, 255)",
       },
     },
   },
@@ -48,14 +51,17 @@ const themes = {
       primary: {
         backgroundColor: "rgb(124, 93, 250)",
         color: "rgb(255, 255, 255)",
+        hover:"rgb(146, 119, 255)",
       },
       secondary: {
         backgroundColor: "rgb(236, 87, 87)",
         color: "rgb(255, 255, 255)",
+        hover: "rgb(255, 151, 151)",
       },
       tertiary: {
         backgroundColor: "rgb(249, 250, 254)",
         color: "rgb(126, 136, 195)",
+        hover: "rgb(223, 227, 250)",
       },
     },
   },
