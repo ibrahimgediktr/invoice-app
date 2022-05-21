@@ -34,6 +34,20 @@ const themes = {
         hover:"rgb(146, 119, 255)",
       },
     },
+    status: {
+      paid:{
+        backgroundColor:"rgba(51, 214, 159, 0.06)",
+        color:"rgb(51, 214, 159)",
+      },
+      pending: {
+        backgroundColor:"rgba(255, 143, 0, 0.06)",
+        color:"rgb(255, 143, 0)",
+      },
+      draft:{
+        backgroundColor:"rgba(223, 227, 250, 0.06)",
+        color:"rgb(223, 227, 250)",
+      }
+    }
   },
   light: {
     type: "light",
@@ -64,6 +78,20 @@ const themes = {
         hover: "rgb(223, 227, 250)",
       },
     },
+    status: {
+      paid:{
+        backgroundColor:"rgba(51, 214, 159, 0.06)",
+        color:"rgb(51, 214, 159)",
+      },
+      pending: {
+        backgroundColor:"rgba(255, 143, 0, 0.06)",
+        color:"rgb(255, 143, 0)",
+      },
+      draft:{
+        backgroundColor:"rgba(55, 59, 83, 0.06)",
+        color:"rgb(55, 59, 83)",
+      }
+    }
   },
 };
 

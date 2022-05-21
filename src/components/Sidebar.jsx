@@ -20,6 +20,7 @@ export default Sidebar;
 
 const Aside = styled.aside`
   position: sticky;
+  top:0;
   display: flex;
   flex-direction: column;
   align-items: center;
