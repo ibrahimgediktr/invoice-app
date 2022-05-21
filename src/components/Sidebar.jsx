@@ -7,7 +7,7 @@ function Sidebar() {
   return (
     <Aside>
       <LogoWrapper>
-        <Img src="images/logo.svg" alt="Invoice App" />
+        <Img src="/images/logo.svg" alt="Invoice App" />
       </LogoWrapper>
       <ToggleButton />
       <SidebarDivider />

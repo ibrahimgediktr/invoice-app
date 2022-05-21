@@ -16,7 +16,7 @@ function App() {
             <div className="container">
               <Routes>
                 <Route path="/" exact element={<Home />} />
-                <Route path="/:invoice_id" element={<InvoiceDetail />} />
+                <Route path="/invoice/:invoice_id" element={<InvoiceDetail />} />
               </Routes>
             </div>
           </Main>

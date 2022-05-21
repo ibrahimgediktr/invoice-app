@@ -8,7 +8,7 @@ import InvoiceItem from "../components/InvoiceItem";
 function Home() {
   const localData =
     JSON.parse(window.localStorage.getItem("invoices")) || invoicesData;
-  const [invoices, setInvoices] = useState(localData);
+  const [invoices] = useState(localData);
 
   useEffect(() => {
     window.localStorage.setItem("invoices", JSON.stringify(invoices));

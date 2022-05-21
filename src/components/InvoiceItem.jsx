@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import Status from "./Status";
+import {Link} from 'react-router-dom'
 
 function InvoiceItem({ invoice }) {
   console.log(invoice);
   return (
-    <InvoiceItemWrapper>
+    <InvoiceItemWrapper to={`/invoice/${invoice.id}`}>
       <Heading>{invoice.id}</Heading>
       <PaymentDue>{invoice.paymentDue}</PaymentDue>
       <ClientName>{invoice.clientName}</ClientName>
@@ -18,7 +19,7 @@ function InvoiceItem({ invoice }) {
 
 export default InvoiceItem;
 
-const InvoiceItemWrapper = styled.a`
+const InvoiceItemWrapper = styled(Link)`
   cursor: pointer;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr min-content;
@@ -26,6 +27,7 @@ const InvoiceItemWrapper = styled.a`
   padding: 1rem 1.5rem;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
+  text-decoration:none;
   border: ${(props) =>
     props.theme.type === "dark"
       ? "1px solid rgb(30, 33, 57)"

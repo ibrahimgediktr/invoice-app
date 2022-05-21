@@ -7,7 +7,7 @@ function ToggleButton() {
     
   return (
     <Button onClick={toggleTheme}>
-      <Img src={theme === "dark" ? "images/icon-sun.svg" : "images/icon-moon.svg"} />
+      <Img src={theme === "dark" ? "/images/icon-sun.svg" : "/images/icon-moon.svg"} />
     </Button>
   )
 }
