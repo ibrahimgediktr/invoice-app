@@ -76,6 +76,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     background-color:${(props) => props.theme.background};
+    font-family: 'League Spartan', sans-serif;
   }
 `;
 

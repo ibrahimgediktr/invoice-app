@@ -34,9 +34,10 @@ const Layout = styled.div`
 `
 const Main = styled.main`
   padding:3rem;
-  max-width:750px;
+  max-width:850px;
   margin-left:auto;
   margin-right:auto;
+  width:100%;
   @media (max-width:992px){
     padding:2rem;
   }
