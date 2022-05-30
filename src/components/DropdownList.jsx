@@ -54,6 +54,8 @@ const CustomCheckbox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width:1rem;
+  min-height:1rem;
   width: 1rem;
   height: 1rem;
   margin-right: 1rem;
