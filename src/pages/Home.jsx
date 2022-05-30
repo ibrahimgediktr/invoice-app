@@ -1,18 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Button } from "../components/Button";
 import styled from "styled-components";
 import Header from "../components/Header";
-import invoicesData from "../data/data.json";
 import InvoiceItem from "../components/InvoiceItem";
 
-function Home() {
-  const localData =
-    JSON.parse(window.localStorage.getItem("invoices")) || invoicesData;
-  const [invoices] = useState(localData);
-
-  useEffect(() => {
-    window.localStorage.setItem("invoices", JSON.stringify(invoices));
-  }, [invoices]);
+function Home({invoices}) {
 
   return (
     <HomeWrapper>
