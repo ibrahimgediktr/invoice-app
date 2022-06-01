@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../components/Button";
+import EditInvoiceForm from "../components/EditInvoiceForm";
 import Status from "../components/Status";
 
 function InvoiceDetail({ invoices }) {
   const { invoice_id } = useParams();
   const [invoice, setInvoice] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -21,120 +23,123 @@ function InvoiceDetail({ invoices }) {
     return <div>Loading...</div>;
   } else {
     return (
-      <InvoiceDetailWrapper>
-        <BackButton onClick={() => navigate(-1)}>
-          <Icon src="/images/icon-arrow-left.svg" alt="" />
-          <Text>Go Back</Text>
-        </BackButton>
-        <Header>
-          <HeaderStatus>
-            <StatusText>Status</StatusText>
-            <StyledStatus status={invoice.status}>
-              {invoice.status}
-            </StyledStatus>
-          </HeaderStatus>
-          <HeaderButtons>
+      <>
+        <EditInvoiceForm setIsOpen={setIsOpen} invoice={invoice} isOpen={isOpen} />
+        <InvoiceDetailWrapper>
+          <BackButton onClick={() => navigate(-1)}>
+            <Icon src="/images/icon-arrow-left.svg" alt="" />
+            <Text>Go Back</Text>
+          </BackButton>
+          <Header>
+            <HeaderStatus>
+              <StatusText>Status</StatusText>
+              <StyledStatus status={invoice.status}>
+                {invoice.status}
+              </StyledStatus>
+            </HeaderStatus>
+            <HeaderButtons>
+              <StyledButton tertiary onClick={() => setIsOpen(true)}>Edit</StyledButton>
+              <StyledButton secondary>Delete</StyledButton>
+            </HeaderButtons>
+          </Header>
+          <Body>
+            <InvoiceTitle>
+              <InvoiceId>#{invoice.id}</InvoiceId>
+              <InvoiceDescription>{invoice.description}</InvoiceDescription>
+            </InvoiceTitle>
+            <InvoiceSenderAddress>
+              <Address>{invoice.senderAddress.street}</Address>
+              <Address>{invoice.senderAddress.city}</Address>
+              <Address>{invoice.senderAddress.postCode}</Address>
+              <Address>{invoice.senderAddress.country}</Address>
+            </InvoiceSenderAddress>
+            <InvoiceDates>
+              <InvoiceDate>
+                <InvoiceDateTitle>Invoice Date</InvoiceDateTitle>
+                <InvoiceDateContent>{invoice.createdAt}</InvoiceDateContent>
+              </InvoiceDate>
+              <InvoiceDate>
+                <InvoiceDateTitle>Payment Due</InvoiceDateTitle>
+                <InvoiceDateContent>{invoice.paymentDue}</InvoiceDateContent>
+              </InvoiceDate>
+            </InvoiceDates>
+            <InoviceBill>
+              <InvoiceAddressTitle>Bill To</InvoiceAddressTitle>
+              <InvoiceClientName>{invoice.clientName}</InvoiceClientName>
+              <InvoiceClientAdress>
+                <Address>{invoice.clientAddress.street}</Address>
+                <Address>{invoice.clientAddress.city}</Address>
+                <Address>{invoice.clientAddress.postCode}</Address>
+                <Address>{invoice.clientAddress.country}</Address>
+              </InvoiceClientAdress>
+            </InoviceBill>
+            <InvoiceEmail>
+              <InvoiceEmailTitle>Send to</InvoiceEmailTitle>
+              <InvoiceEmailContent>{invoice.clientEmail}</InvoiceEmailContent>
+            </InvoiceEmail>
+            <InvoiceTableContainer>
+              <InvoiceTable>
+                <TableHead>
+                  <Tr>
+                    <Th
+                      width="30%"
+                      align="left"
+                      padding="0.5rem 0rem 0rem 1.75rem"
+                    >
+                      Name
+                    </Th>
+                    <Th width="20%" align="left" padding="1rem 0 1.5rem">
+                      Quantity
+                    </Th>
+                    <Th width="20%" align="left" padding="1rem 0 1.5rem">
+                      Price
+                    </Th>
+                    <Th
+                      width="30%"
+                      align="right"
+                      padding="0.5rem 1.75rem 0rem 0rem"
+                    >
+                      Total
+                    </Th>
+                  </Tr>
+                </TableHead>
+                <TableBody>
+                  {invoice.items.map((item, index) => (
+                    <Tr key={index}>
+                      <Td align="left" padding="1rem 0rem 1.5rem 1.75rem">
+                        {item.name}
+                      </Td>
+                      <Td align="left" padding="1rem 0 1.5rem">
+                        {item.quantity}
+                      </Td>
+                      <Td align="left" padding="1rem 0 1.5rem">
+                        {item.price}
+                      </Td>
+                      <Td align="right" padding="1rem 1.75rem 1.5rem 0rem">
+                        {item.total}
+                      </Td>
+                    </Tr>
+                  ))}
+                </TableBody>
+                <TableFooter>
+                  <Td align="left" padding="1.5rem 0rem 1.5rem 1.75rem">
+                    Amount Due
+                  </Td>
+                  <Td></Td>
+                  <Td></Td>
+                  <Td align="right" padding="1.5rem 1.75rem 1.5rem 0rem">
+                    <Total>1.800.9 ₺</Total>
+                  </Td>
+                </TableFooter>
+              </InvoiceTable>
+            </InvoiceTableContainer>
+          </Body>
+          <Footer>
             <StyledButton tertiary>Edit</StyledButton>
             <StyledButton secondary>Delete</StyledButton>
-          </HeaderButtons>
-        </Header>
-        <Body>
-          <InvoiceTitle>
-            <InvoiceId>#{invoice.id}</InvoiceId>
-            <InvoiceDescription>{invoice.description}</InvoiceDescription>
-          </InvoiceTitle>
-          <InvoiceSenderAddress>
-            <Address>{invoice.senderAddress.street}</Address>
-            <Address>{invoice.senderAddress.city}</Address>
-            <Address>{invoice.senderAddress.postCode}</Address>
-            <Address>{invoice.senderAddress.country}</Address>
-          </InvoiceSenderAddress>
-          <InvoiceDates>
-            <InvoiceDate>
-              <InvoiceDateTitle>Invoice Date</InvoiceDateTitle>
-              <InvoiceDateContent>{invoice.createdAt}</InvoiceDateContent>
-            </InvoiceDate>
-            <InvoiceDate>
-              <InvoiceDateTitle>Payment Due</InvoiceDateTitle>
-              <InvoiceDateContent>{invoice.paymentDue}</InvoiceDateContent>
-            </InvoiceDate>
-          </InvoiceDates>
-          <InoviceBill>
-            <InvoiceAddressTitle>Bill To</InvoiceAddressTitle>
-            <InvoiceClientName>{invoice.clientName}</InvoiceClientName>
-            <InvoiceClientAdress>
-              <Address>{invoice.clientAddress.street}</Address>
-              <Address>{invoice.clientAddress.city}</Address>
-              <Address>{invoice.clientAddress.postCode}</Address>
-              <Address>{invoice.clientAddress.country}</Address>
-            </InvoiceClientAdress>
-          </InoviceBill>
-          <InvoiceEmail>
-            <InvoiceEmailTitle>Send to</InvoiceEmailTitle>
-            <InvoiceEmailContent>{invoice.clientEmail}</InvoiceEmailContent>
-          </InvoiceEmail>
-          <InvoiceTableContainer>
-            <InvoiceTable>
-              <TableHead>
-                <Tr>
-                  <Th
-                    width="30%"
-                    align="left"
-                    padding="0.5rem 0rem 0rem 1.75rem"
-                  >
-                    Name
-                  </Th>
-                  <Th width="20%" align="left" padding="1rem 0 1.5rem">
-                    Quantity
-                  </Th>
-                  <Th width="20%" align="left" padding="1rem 0 1.5rem">
-                    Price
-                  </Th>
-                  <Th
-                    width="30%"
-                    align="right"
-                    padding="0.5rem 1.75rem 0rem 0rem"
-                  >
-                    Total
-                  </Th>
-                </Tr>
-              </TableHead>
-              <TableBody>
-                {invoice.items.map((item, index) => (
-                  <Tr key={index}>
-                    <Td align="left" padding="1rem 0rem 1.5rem 1.75rem">
-                      {item.name}
-                    </Td>
-                    <Td align="left" padding="1rem 0 1.5rem">
-                      {item.quantity}
-                    </Td>
-                    <Td align="left" padding="1rem 0 1.5rem">
-                      {item.price}
-                    </Td>
-                    <Td align="right" padding="1rem 1.75rem 1.5rem 0rem">
-                      {item.total}
-                    </Td>
-                  </Tr>
-                ))}
-              </TableBody>
-              <TableFooter>
-                <Td align="left" padding="1.5rem 0rem 1.5rem 1.75rem">
-                  Amount Due
-                </Td>
-                <Td></Td>
-                <Td></Td>
-                <Td align="right" padding="1.5rem 1.75rem 1.5rem 0rem">
-                  <Total>1.800.9 ₺</Total>
-                </Td>
-              </TableFooter>
-            </InvoiceTable>
-          </InvoiceTableContainer>
-        </Body>
-        <Footer>
-          <StyledButton tertiary>Edit</StyledButton>
-          <StyledButton secondary>Delete</StyledButton>
-        </Footer>
-      </InvoiceDetailWrapper>
+          </Footer>
+        </InvoiceDetailWrapper>
+      </>
     );
   }
 }
@@ -371,7 +376,7 @@ const Footer = styled.div`
   border-radius: 0.5rem;
   margin-top: 1.5rem;
   display: none;
-  text-align:right;
+  text-align: right;
   @media (max-width: 768px) {
     display: block;
   }
