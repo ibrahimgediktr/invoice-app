@@ -73,6 +73,58 @@ function InvoiceDetail({ invoices }) {
             <InvoiceEmailTitle>Send to</InvoiceEmailTitle>
             <InvoiceEmailContent>{invoice.clientEmail}</InvoiceEmailContent>
           </InvoiceEmail>
+          <InvoiceTableContainer>
+            <InvoiceTable>
+              <TableHead>
+                <Tr>
+                  <Th
+                    width="30%"
+                    align="left"
+                    padding="0.5rem 0rem 0rem 1.75rem"
+                  >
+                    Name
+                  </Th>
+                  <Th width="20%" align="left" padding="1rem 0 1.5rem">
+                    Quantity
+                  </Th>
+                  <Th width="20%" align="left" padding="1rem 0 1.5rem">
+                    Price
+                  </Th>
+                  <Th
+                    width="30%"
+                    align="right"
+                    padding="0.5rem 1.75rem 0rem 0rem"
+                  >
+                    Total
+                  </Th>
+                </Tr>
+              </TableHead>
+              <TableBody>
+                {invoice.items.map((item, index) => (
+                  <Tr key={index}>
+                    <Td align="left" padding="1rem 0rem 1.5rem 1.75rem">
+                      {item.name}
+                    </Td>
+                    <Td align="left" padding="1rem 0 1.5rem">{item.quantity}</Td>
+                    <Td align="left" padding="1rem 0 1.5rem">{item.price}</Td>
+                    <Td align="right" padding="1rem 1.75rem 1.5rem 0rem">
+                      {item.total}
+                    </Td>
+                  </Tr>
+                ))}
+              </TableBody>
+              <TableFooter>
+                <Td align="left" padding="1.5rem 0rem 1.5rem 1.75rem">
+                  Amount Due
+                </Td>
+                <Td ></Td>
+                <Td ></Td>
+                <Td  align="right" padding="1.5rem 1.75rem 1.5rem 0rem">
+                  <Total>1.800.9 ₺</Total>
+                </Td>
+              </TableFooter>
+            </InvoiceTable>
+          </InvoiceTableContainer>
         </Body>
       </InvoiceDetailWrapper>
     );
@@ -101,14 +153,14 @@ const Header = styled.div`
     props.theme.type === "dark" ? "rgb(30, 33, 57)" : "rgb(255, 255, 255)"};
   padding: 1.5rem;
   border-radius: 0.5rem;
-  @media (max-width:768px){
-    justify-content:unset !important;
+  @media (max-width: 768px) {
+    justify-content: unset !important;
   }
 `;
 const HeaderStatus = styled.div`
   display: flex;
   align-items: center;
-  @media (max-width:768px){
+  @media (max-width: 768px) {
     justify-content: space-between;
     width: 100%;
   }
@@ -118,7 +170,6 @@ const StatusText = styled.span`
     props.theme.type === "dark" ? "rgb(223, 227, 250)" : "rgb(136, 142, 176)"};
   font-weight: 400;
   font-size: 0.9rem;
- 
 `;
 const StyledStatus = styled(Status)`
   margin-left: 1rem;
@@ -129,8 +180,8 @@ const StyledButton = styled(Button)`
 
 const HeaderButtons = styled.div`
   margin-left: 1rem;
-  @media (max-width:768px){
-    display:none;
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 const Body = styled.div`
@@ -143,24 +194,26 @@ const Body = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas:
     "title title sender"
-    "dates client email";
+    "dates client email"
+    "table table table";
   justify-items: start;
   grid-row-gap: 1.5rem;
-  @media (max-width:768px){
+  @media (max-width: 768px) {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-    "title title"
-    "sender sender"
-    "dates client"
-    "dates client"
-    "email email"
+      "title title"
+      "sender sender"
+      "dates client"
+      "dates client"
+      "email email"
+      "table table";
   }
-  @media (max-width:576px){
-    grid-template-columns:1fr;
-    grid-template-areas:unset;
-     * {
-      grid-area:unset !important;
-    };
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+    grid-template-areas: unset;
+    * {
+      grid-area: unset !important;
+    }
   }
 `;
 
@@ -188,21 +241,19 @@ const InvoiceSenderAddress = styled.address`
   font-style: normal;
   align-self: end;
   width: 100%;
-  @media (max-width:768px){
-    align-self:start;
-    ${Address}{
-      text-align:left;
+  @media (max-width: 768px) {
+    align-self: start;
+    ${Address} {
+      text-align: left;
     }
   }
 `;
-
 
 const InvoiceDates = styled.div`
   grid-area: dates;
 `;
 const InvoiceDate = styled.div`
-  margin-bottom:1.5rem;
-
+  margin-bottom: 1.5rem;
 `;
 const InvoiceDateTitle = styled.span`
   display: block;
@@ -212,13 +263,13 @@ const InvoiceDateContent = styled.h5`
   display: block;
   margin-top: 0.5rem;
   color: ${(props) => props.theme.text.primary.color};
-  font-size:1.25rem;
+  font-size: 1.25rem;
 `;
 const InoviceBill = styled.div`
   grid-area: client;
-  text-align:left;
-  ${Address}{
-    text-align:left;
+  text-align: left;
+  ${Address} {
+    text-align: left;
   }
 `;
 const InvoiceAddressTitle = styled.span`
@@ -227,8 +278,8 @@ const InvoiceAddressTitle = styled.span`
 `;
 const InvoiceClientName = styled.h5`
   color: ${(props) => props.theme.text.primary.color};
-  font-size:1.25rem;
-  margin:0.75rem 0;
+  font-size: 1.25rem;
+  margin: 0.75rem 0;
 `;
 const InvoiceClientAdress = styled.address`
   font-style: normal;
@@ -243,5 +294,63 @@ const InvoiceEmailTitle = styled.span`
 const InvoiceEmailContent = styled.h5`
   margin-top: 0.5rem;
   color: ${(props) => props.theme.text.primary.color};
-  font-size:1.25rem;
+  font-size: 1.25rem;
+`;
+
+const InvoiceTableContainer = styled.div`
+  background-color: ${(props) => props.theme.buttons.tertiary.backgroundColor};
+  width: 100%;
+  grid-area: table;
+  border-radius: 0.5rem;
+  overflow: hidden;
+`;
+
+const InvoiceTable = styled.table`
+  width: 100%;
+  border-spacing: 0px;
+  margin-top: 1rem;
+`;
+const TableHead = styled.thead``;
+const TableBody = styled.tbody``;
+const TableFooter = styled.tfoot`
+  background-color: ${(props) =>
+    props.theme.type === "dark" ? "rgb(12, 14, 22)" : "rgb(55, 59, 83)"};
+  border-radius: 0.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+ * {
+  color: #fff !important;
+ }
+`;
+const Tr = styled.tr``;
+const Th = styled.th`
+  width: ${(props) => props.width};
+  text-align: ${(props) => props.align};
+  padding: ${(props) => props.padding};
+  color: ${(props) => props.theme.text.secondary.color};
+  padding-top: 0.5rem;
+  padding-bottom: 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  @media (max-width:768px){
+   display:none;
+  }
+`;
+const Td = styled.td`
+  color: ${(props) => props.theme.text.primary.color};
+  padding: ${(props) => props.padding};
+  text-align: ${(props) => props.align};
+  @media (max-width:768px){
+   &:nth-child(2), &:nth-child(3){
+     display:none;
+   }
+  }
+`;
+
+const Total = styled.h5`
+  font-size: 1.5rem;
+  @media (max-width:576px){
+    font-size:1.25rem;
+    white-space:nowrap;
+  }
 `;
