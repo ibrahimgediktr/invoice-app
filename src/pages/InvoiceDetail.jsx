@@ -105,8 +105,12 @@ function InvoiceDetail({ invoices }) {
                     <Td align="left" padding="1rem 0rem 1.5rem 1.75rem">
                       {item.name}
                     </Td>
-                    <Td align="left" padding="1rem 0 1.5rem">{item.quantity}</Td>
-                    <Td align="left" padding="1rem 0 1.5rem">{item.price}</Td>
+                    <Td align="left" padding="1rem 0 1.5rem">
+                      {item.quantity}
+                    </Td>
+                    <Td align="left" padding="1rem 0 1.5rem">
+                      {item.price}
+                    </Td>
                     <Td align="right" padding="1rem 1.75rem 1.5rem 0rem">
                       {item.total}
                     </Td>
@@ -117,15 +121,19 @@ function InvoiceDetail({ invoices }) {
                 <Td align="left" padding="1.5rem 0rem 1.5rem 1.75rem">
                   Amount Due
                 </Td>
-                <Td ></Td>
-                <Td ></Td>
-                <Td  align="right" padding="1.5rem 1.75rem 1.5rem 0rem">
+                <Td></Td>
+                <Td></Td>
+                <Td align="right" padding="1.5rem 1.75rem 1.5rem 0rem">
                   <Total>1.800.9 ₺</Total>
                 </Td>
               </TableFooter>
             </InvoiceTable>
           </InvoiceTableContainer>
         </Body>
+        <Footer>
+          <StyledButton tertiary>Edit</StyledButton>
+          <StyledButton secondary>Delete</StyledButton>
+        </Footer>
       </InvoiceDetailWrapper>
     );
   }
@@ -318,9 +326,9 @@ const TableFooter = styled.tfoot`
   border-radius: 0.5rem;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
- * {
-  color: #fff !important;
- }
+  * {
+    color: #fff !important;
+  }
 `;
 const Tr = styled.tr``;
 const Th = styled.th`
@@ -332,25 +340,39 @@ const Th = styled.th`
   padding-bottom: 1.25rem;
   font-size: 0.9rem;
   font-weight: 400;
-  @media (max-width:768px){
-   display:none;
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 const Td = styled.td`
   color: ${(props) => props.theme.text.primary.color};
   padding: ${(props) => props.padding};
   text-align: ${(props) => props.align};
-  @media (max-width:768px){
-   &:nth-child(2), &:nth-child(3){
-     display:none;
-   }
+  @media (max-width: 768px) {
+    &:nth-child(2),
+    &:nth-child(3) {
+      display: none;
+    }
   }
 `;
 
 const Total = styled.h5`
   font-size: 1.5rem;
-  @media (max-width:576px){
-    font-size:1.25rem;
-    white-space:nowrap;
+  @media (max-width: 576px) {
+    font-size: 1.25rem;
+    white-space: nowrap;
+  }
+`;
+
+const Footer = styled.div`
+  background-color: ${(props) =>
+    props.theme.type === "dark" ? "rgb(30, 33, 57)" : "rgb(255, 255, 255)"};
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-top: 1.5rem;
+  display: none;
+  text-align:right;
+  @media (max-width: 768px) {
+    display: block;
   }
 `;
