@@ -1,7 +1,6 @@
 # Invoice app
 
 
-
 ## Overview
 
 - View the optimal layout for the app depending on their device's screen size
@@ -13,12 +12,12 @@
 - Toggle light and dark mode
 
 
-
 ### Building with
 
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
+- React
 - Context API
+- Styled Components
+- Formik
 
 ## Author
 
