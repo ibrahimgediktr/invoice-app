@@ -4,7 +4,6 @@ import Status from "./Status";
 import {Link} from 'react-router-dom'
 
 function InvoiceItem({ invoice }) {
-  console.log(invoice);
   return (
     <InvoiceItemWrapper to={`/invoice/${invoice.id}`}>
       <Heading>{invoice.id}</Heading>

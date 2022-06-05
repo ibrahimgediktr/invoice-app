@@ -10,7 +10,7 @@ function InvoiceDetail({ invoices }) {
   const [invoice, setInvoice] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
-
+  const [total, setTotal] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,12 +19,21 @@ function InvoiceDetail({ invoices }) {
     setLoading(false);
   }, [invoices, invoice_id]);
 
+  useEffect(() => {
+    setTotal(invoice?.items?.reduce((acc, item) => acc + item.total, 0));
+    // eslint-disable-next-line
+  }, [total]);
+
   if (loading) {
     return <div>Loading...</div>;
   } else {
     return (
       <>
-        <EditInvoiceForm setIsOpen={setIsOpen} invoice={invoice} isOpen={isOpen} />
+        <EditInvoiceForm
+          setIsOpen={setIsOpen}
+          invoice={invoice}
+          isOpen={isOpen}
+        />
         <InvoiceDetailWrapper>
           <BackButton onClick={() => navigate(-1)}>
             <Icon src="/images/icon-arrow-left.svg" alt="" />
@@ -38,7 +47,9 @@ function InvoiceDetail({ invoices }) {
               </StyledStatus>
             </HeaderStatus>
             <HeaderButtons>
-              <StyledButton tertiary onClick={() => setIsOpen(true)}>Edit</StyledButton>
+              <StyledButton tertiary onClick={() => setIsOpen(true)}>
+                Edit
+              </StyledButton>
               <StyledButton secondary>Delete</StyledButton>
             </HeaderButtons>
           </Header>
@@ -113,23 +124,25 @@ function InvoiceDetail({ invoices }) {
                         {item.quantity}
                       </Td>
                       <Td align="left" padding="1rem 0 1.5rem">
-                        {item.price}
+                        {item.price} $
                       </Td>
                       <Td align="right" padding="1rem 1.75rem 1.5rem 0rem">
-                        {item.total}
+                        {item.total} $
                       </Td>
                     </Tr>
                   ))}
                 </TableBody>
                 <TableFooter>
-                  <Td align="left" padding="1.5rem 0rem 1.5rem 1.75rem">
-                    Amount Due
-                  </Td>
-                  <Td></Td>
-                  <Td></Td>
-                  <Td align="right" padding="1.5rem 1.75rem 1.5rem 0rem">
-                    <Total>1.800.9 ₺</Total>
-                  </Td>
+                  <Tr>
+                    <Td align="left" padding="1.5rem 0rem 1.5rem 1.75rem">
+                      Amount Due
+                    </Td>
+                    <Td></Td>
+                    <Td></Td>
+                    <Td align="right" padding="1.5rem 1.75rem 1.5rem 0rem">
+                      <Total>{total} $</Total>
+                    </Td>
+                  </Tr>
                 </TableFooter>
               </InvoiceTable>
             </InvoiceTableContainer>

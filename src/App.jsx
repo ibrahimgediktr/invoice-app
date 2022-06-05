@@ -6,6 +6,7 @@ import Sidebar from "./components/Sidebar";
 import { ThemeProvider } from "./context/ThemeContext";
 import styled from "styled-components";
 import InvoiceDetail from "./pages/InvoiceDetail";
+import Test from './pages/Test';
 
 function App() {
   const localData =
@@ -28,6 +29,10 @@ function App() {
                 <Route
                   path="/invoice/:invoice_id"
                   element={<InvoiceDetail invoices={invoices} />}
+                />
+                <Route
+                  path="/test"
+                  element={<Test />}
                 />
               </Routes>
             </div>
