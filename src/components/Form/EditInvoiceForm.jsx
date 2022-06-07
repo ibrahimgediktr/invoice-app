@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { Formik, Field } from "formik";
 import { Input } from "./Input";
+import InvoiceItem from "./InvoiceItem";
 
 function EditInvoiceForm({ isOpen, setIsOpen, invoice }) {
   function onSubmit(values) {
@@ -154,6 +155,12 @@ function EditInvoiceForm({ isOpen, setIsOpen, invoice }) {
                     />
                   </FormGroup>
                 </Fieldset>
+                <Fieldset field="item-list">
+                  <Legend field="item-list">Item List</Legend>
+                  {formik.initialValues.items?.map((item, index) => (
+                    <InvoiceItem key={index} item={item} formik={formik} index={index} />
+                  ))}
+                </Fieldset>
               </Form>
             )}
           </Formik>
@@ -243,6 +250,11 @@ const Fieldset = styled.fieldset`
         }
       `;
     }
+    if (props.field === "item-list") {
+      return css`
+        grid-template-columns: max-content 50px 1fr 1fr min-content;
+      `;
+    }
   }};
 `;
 
@@ -273,6 +285,6 @@ const StyledField = styled(Field)`
       ? "1px solid rgb(37, 41, 69)"
       : "1px solid rgb(223, 227, 250)"};
   border-radius: 0.5rem;
-  font-weight:bold;
-  font-size:0.75rem;
+  font-weight: bold;
+  font-size: 0.75rem;
 `;

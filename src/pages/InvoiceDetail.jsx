@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../components/Button";
-import EditInvoiceForm from "../components/EditInvoiceForm";
+import EditInvoiceForm from "../components/Form/EditInvoiceForm";
 import Status from "../components/Status";
 
 function InvoiceDetail({ invoices }) {
